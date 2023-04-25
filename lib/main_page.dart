@@ -59,7 +59,15 @@ class _Index_pageState extends State<Index_page> {
                           ),
                         ).then((value) => Navigator.pop(context));
                       },
-                      child: Text('devloper')),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                              color: Colors.grey,
+                              Icons.person_pin_circle_outlined),
+                          Text('devloper'),
+                        ],
+                      )),
                 ),
               ],
             ),
@@ -83,31 +91,40 @@ class _Index_pageState extends State<Index_page> {
               onTap: () {
                 Navigator.push(
                   (context),
-                  MaterialPageRoute(builder: (context) {
-                    return Level1(lang[index]);
-                  },),
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return Level1(lang[index]);
+                    },
+                  ),
                 );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   color: Color(0xFF41586c),
-                  child: Column(
+                  child: Stack(
+                    fit: StackFit.expand,
                     children: [
-                      Expanded(
-                          child: Padding(
+                      Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image.asset(imageList[index]),
-                      )),
-                      Expanded(
-                        child: Text(
-                          lang[index],
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional.bottomCenter,
+                        child: Container(
+                          padding: EdgeInsets.only(top: 10),
+                          height:50,
+                          width: double.infinity,
+                          color:Color.fromRGBO(0, 0, 0, 0.65),
+                          child: Text(
+                            lang[index],
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       )
                     ],
