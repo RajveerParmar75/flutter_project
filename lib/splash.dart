@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:typing_tutior/Index.dart';
 import 'package:typing_tutior/main_page.dart';
 
 class Splash extends StatefulWidget {
@@ -18,7 +19,8 @@ class SplashState extends State<Splash> {
 
   route() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const Index_page()));
+                                  //index page will replace hear
+        context, MaterialPageRoute(builder: (context) => Index_page()));
   }
 
   @override

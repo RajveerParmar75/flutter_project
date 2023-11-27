@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:typing_tutior/ad_helper/ad_helper.dart';
 import 'package:typing_tutior/utils/colors.dart';
 import 'function.dart';
+import 'package:aswdc_flutter_pub/aswdc_flutter_pub.dart';
 
 // ignore: must_be_immutable
 class Level1 extends StatefulWidget {
@@ -158,11 +159,10 @@ class _Level1State extends State<Level1> {
   }
 
   demo() {
-
-      setState(() {
-        calculateTime(correct + incorrect);
-        cpm = getCPM(correct + incorrect);
-      });
+    setState(() {
+      calculateTime(correct + incorrect);
+      cpm = getCPM(correct + incorrect);
+    });
   }
 
   whichImage(String c) {
@@ -308,11 +308,12 @@ class _Level1State extends State<Level1> {
     //   });
     // });
     whichString(widget.whichRow);
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    // SystemChrome.setPreferredOrientations(
+    //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     super.initState();
   }
- @override
+
+  @override
   void dispose() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
@@ -325,123 +326,244 @@ class _Level1State extends State<Level1> {
 
   Widget whichViwe(flag) {
     if (flag) {
+
       return SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: kPrimaryBackgroundColor,
-              // <-- SEE HERE
-              statusBarIconBrightness: Brightness.dark,
-              //<-- For Android SEE HERE (dark icons)
-              statusBarBrightness:
-                  Brightness.light, //<-- For iOS SEE HERE (dark icons)
+            appBar: AppBar(
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarColor: kPrimaryBackgroundColor,
+                // <-- SEE HERE
+                statusBarIconBrightness: Brightness.dark,
+                //<-- For Android SEE HERE (dark icons)
+                statusBarBrightness:
+                    Brightness.light, //<-- For iOS SEE HERE (dark icons)
+              ),
+              backgroundColor: const Color(0xFFFD8469),
+              title: Center(
+                child: Text(widget.whichRow),
+              ),
             ),
-            backgroundColor: const Color(0xFFFD8469),
-            title: Center(
-              child: Text(widget.whichRow),
-            ),
-          ),
-          body: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(top: 10, bottom: 10),
-                      color: Colors.black87,
-                      child: Row(
-                        children: [
-                          getExpanded('Correct'),
-                          getExpanded("Wrong"),
-                          getExpanded("avg"),
-                          getExpanded("Speed")
-                        ],
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        getExpanded(correct.toString(),
-                            colortext: Colors.black87),
-                        getExpanded(incorrect.toString(),
-                            colortext: Colors.red),
-                        getExpanded(avg.floor().toString(),
-                            colortext: Colors.black87, symboles: '%'),
-                        getExpanded(cpm.toString(),
-                            colortext: Colors.black87, symboles: "WPM")
-                      ],
-                    ),
-                    Container(
-                      height: 2,
-                      color: Colors.black87,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: getSplitValue(test, colors),
-                      ),
-                    ),
-
-                    // Text(
-                    //   style: const TextStyle(fontSize: 30),
-                    //   test[count],
-                    // ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 50,left: 10,right: 10),
-                      child: Row(
+            body: OrientationBuilder(
+              builder: (BuildContext context, Orientation orientation) {
+                return orientation == Orientation.portrait
+                    ? Row(
                         children: [
                           Expanded(
-                            flex: 4,
                             child: Column(
                               children: [
-                                Row(children: multipleWidget(keys[0], c[0])),
-                                Row(children: multipleWidget(keys[1], c[1])),
-                                Row(children: multipleWidget(keys[2], c[2])),
-                                Row(children: multipleWidget(keys[3], c[3])),
+                                Container(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 10),
+                                  color: Colors.black87,
+                                  child: Row(
+                                    children: [
+                                      getExpanded('Correct'),
+                                      getExpanded("Wrong"),
+                                      getExpanded("avg"),
+                                      getExpanded("Speed")
+                                    ],
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    getExpanded(correct.toString(),
+                                        colortext: Colors.black87),
+                                    getExpanded(incorrect.toString(),
+                                        colortext: Colors.red),
+                                    getExpanded(avg.floor().toString(),
+                                        colortext: Colors.black87,
+                                        symboles: '%'),
+                                    getExpanded(cpm.toString(),
+                                        colortext: Colors.black87,
+                                        symboles: "WPM")
+                                  ],
+                                ),
+                                Container(
+                                  height: 2,
+                                  color: Colors.black87,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 30),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: getSplitValue(test, colors),
+                                  ),
+                                ),
+
+                                // Text(
+                                //   style: const TextStyle(fontSize: 30),
+                                //   test[count],
+                                // ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 50, left: 10, right: 10),
+                                  child: Row(
+                                    children: [
+
+                                      Expanded(
+                                        flex: 4,
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                                children: multipleWidget(
+                                                    keys[0], c[0])),
+                                            Row(
+                                                children: multipleWidget(
+                                                    keys[1], c[1])),
+                                            Row(
+                                                children: multipleWidget(
+                                                    keys[2], c[2])),
+                                            Row(
+                                                children: multipleWidget(
+                                                    keys[3], c[3])),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(50.0),
+                                            child: Image.asset(
+                                              whichImage(
+                                                test[count].toString(),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(50.0),
+                                            child: Image.asset(
+                                              whichImageOnRight(
+                                                test[count].toString(),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           ),
                         ],
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
+                      )
+                    : Row(
+                        children: [
+                          Expanded(
+                              child: Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(50.0),
-                                child: Image.asset(
-                                  whichImage(
-                                    test[count].toString(),
-                                  ),
+                              Container(
+                                padding:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                color: Colors.black87,
+                                child: Row(
+                                  children: [
+                                    getExpanded('Correct'),
+                                    getExpanded("Wrong"),
+                                    getExpanded("avg"),
+                                    getExpanded("Speed")
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
+                              Row(
+                                children: [
+                                  getExpanded(correct.toString(),
+                                      colortext: Colors.black87),
+                                  getExpanded(incorrect.toString(),
+                                      colortext: Colors.red),
+                                  getExpanded(avg.floor().toString(),
+                                      colortext: Colors.black87, symboles: '%'),
+                                  getExpanded(cpm.toString(),
+                                      colortext: Colors.black87,
+                                      symboles: "WPM")
+                                ],
+                              ),
+                              Container(
+                                height: 2,
+                                color: Colors.black87,
+                              ),
                               Padding(
-                                padding: const EdgeInsets.all(50.0),
-                                child: Image.asset(
-                                  whichImageOnRight(
-                                    test[count].toString(),
-                                  ),
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: getSplitValue(test, colors),
                                 ),
                               ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      height: 170,
+                                      child: Center(
+                                        child: Image.asset(
+                                          whichImage(
+                                            test[count].toString(),
+                                          ),
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 15, left: 0, right: 0),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 4,
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                    children: multipleWidget(
+                                                        keys[0], c[0])),
+                                                Row(
+                                                    children: multipleWidget(
+                                                        keys[1], c[1])),
+                                                Row(
+                                                    children: multipleWidget(
+                                                        keys[2], c[2])),
+                                                Row(
+                                                    children: multipleWidget(
+                                                        keys[3], c[3])),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(child: Container(
+                                    height: 170,
+                                    child: Center(
+                                      child: Image.asset(
+                                        whichImageOnRight(
+                                          test[count].toString(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),)
+                                ],
+                              )
                             ],
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+                          ))
+                        ],
+                      );
+              },
+            )),
       );
     }
     return SafeArea(
@@ -449,17 +571,22 @@ class _Level1State extends State<Level1> {
         body: Column(
           children: [
             Row(
+
               children: [
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Row(children: getSplitValue(test, colors),),Column()],
+                      children: [
+                        Row(
+                          children: getSplitValue(test, colors),
+                        ),
+                        Column()
+                      ],
                     ),
                   ),
                 ),
-
               ],
             )
           ],
@@ -761,7 +888,7 @@ class _Level1State extends State<Level1> {
               }
           }
       },
-      child: whichViwe(true),
+      child: AdmobBannerAd(widget: whichViwe(true),adUnitId: index_page_id),
     );
   }
 }

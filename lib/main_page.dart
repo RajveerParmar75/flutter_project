@@ -1,8 +1,12 @@
+import 'package:aswdc_flutter_pub/aswdc_flutter_pub.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:typing_tutior/devloper_screen.dart';
 import 'package:typing_tutior/splitValue.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:launch_review/launch_review.dart';
 
+import 'ad_helper/ad_helper.dart';
 class Index_page extends StatefulWidget {
   const Index_page({super.key});
 
@@ -49,90 +53,108 @@ class _Index_pageState extends State<Index_page> {
               itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                 PopupMenuItem(
                   child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return AboutUs();
-                            },
-                          ),
-                        ).then((value) => Navigator.pop(context));
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(
-                              color: Colors.grey,
-                              Icons.person_pin_circle_outlined),
-                          Text('devloper'),
-                        ],
-                      )),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return AboutUs();
+                          },
+                        ),
+                      ).then((value) => Navigator.pop(context));
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                            color: Colors.grey,
+                            Icons.person_pin_circle_outlined),
+                        Text('devloper'),
+                      ],
+                    ),
+                  ),
+                ),
+                PopupMenuItem(
+                  child: InkWell(
+                    onTap: () {
+                      Share.share("https://play.google.com/store/apps/details?id=com.aswdc_typing_tutor&hl=en-IN");
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                            color: Colors.grey,
+                            Icons.share),
+                        Text('Share App'),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
           ],
           // systemOverlayStyle: SystemUiOverlayStyle(statusBarColor:Color(0x66FC6C4A) ),
           backgroundColor: const Color(0xFFFD8469),
-          title: const Center(
-            child: Text("Select Row"),
-          ),
+          centerTitle: true,
+          title: Text("Select Row"),
         )),
         backgroundColor: Colors.white,
-        body: GridView.count(
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          // Create a grid with 2 columns. If you change the scrollDirection to
-          // horizontal, this produces 2 rows.
-          crossAxisCount: 2,
-          // Generate 100 widgets that display their index in the List.
-          children: List.generate(lang.length, (index) {
-            return InkWell(
-              onTap: () {
-                Navigator.push(
-                  (context),
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Level1(lang[index]);
-                    },
-                  ),
-                );
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  color: Color(0xFF41586c),
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Image.asset(imageList[index]),
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional.bottomCenter,
-                        child: Container(
-                          padding: EdgeInsets.only(top: 10),
-                          height:50,
-                          width: double.infinity,
-                          color:Color.fromRGBO(0, 0, 0, 0.65),
-                          child: Text(
-                            lang[index],
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+        body: AdmobBannerAd(adUnitId: index_page_id,
+          widget: GridView.count(
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            // Create a grid with 2 columns. If you change the scrollDirection to
+            // horizontal, this produces 2 rows.
+            crossAxisCount: 2,
+            // Generate 100 widgets that display their index in the List.
+            children: List.generate(lang.length, (index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    (context),
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Level1(lang[index]);
+                      },
+                    ),
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    color: Color(0xFF41586c),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(imageList[index]),
                         ),
-                      )
-                    ],
+                        Align(
+                          alignment: AlignmentDirectional.bottomCenter,
+                          child: Container(
+                            padding: EdgeInsets.only(top: 10),
+                            height: 50,
+                            width: double.infinity,
+                            color: Color.fromRGBO(0, 0, 0, 0.65),
+                            child: Text(
+                              lang[index],
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+          ),
         ),
         // SingleChildScrollView(
         //   child: Center(
@@ -167,7 +189,7 @@ class _Index_pageState extends State<Index_page> {
                       st,
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
